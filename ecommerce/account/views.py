@@ -12,7 +12,7 @@ from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate, login, logout
-
+from django.contrib import messages
 
 def register(request):
 
@@ -106,7 +106,18 @@ def my_login(request):
 
 
 def user_logout(request):
-    auth.logout(request)
+    try:
+        for key in list(request.session.keys()):
+            if key == 'session_key':
+
+                continue
+            else:
+                del request.session[key]
+
+    except KeyError:
+        pass
+
+    messages.success(request, "Logout success")
     return redirect("store")
 
 
@@ -118,19 +129,18 @@ def dashboard(request):
 @login_required(login_url='my-login')
 def profile_management(request):
     # Updating username and email
+    user_form = UpdateUserForm(instance=request.user)
+
     if request.method == 'POST':
 
         user_form = UpdateUserForm(request.POST, instance=request.user)
 
         if user_form.is_valid():
             user_form.save()
-
+            messages.info(request, 'Account updated')
             return redirect('dashboard')
 
-    user_form = UpdateUserForm(instance=request.user)
-
-
-    context = {'user_form':user_form}
+    context = {'user_form': user_form}
     return render(request, 'account/profile-management.html', context)
 
 
@@ -140,6 +150,8 @@ def delete_account(request):
     user = User.objects.get(id=request.user.id)
     if request.method == 'POST':
         user.delete()
+
+        messages.error(request, 'Account deleted')
 
         return redirect('store')
     return render(request, 'account/delete-account.html')

@@ -84,18 +84,30 @@
 
     <div class="collapse navbar-collapse text-center" id="navbarNavDropdown">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'register' %}">
-            Register
-          </a>
-        </li>
+        {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'dashboard' %}">
+              <i class="fa-solid fa-house"></i> &nbsp;Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'user-logout' %}">
+              <i class="fa-solid fa-right-from-bracket"></i> &nbsp;Logout
+            </a>
+          </li>
+        {% else %}
+          <li>
+            <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'register' %}">
+                Register
+              </a>
+          </li>
 
-        <li class="nav-item">
-          <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'my-login' %}">
-            Login
-          </a>
-        </li>
-
+          <li class="nav-item">
+            <a class="btn btn-alert navbar-btn text-white" type="button" href="{% url 'my-login' %}">
+              Login
+            </a>
+          </li>
+        {% endif %}
         &nbsp; &nbsp; &nbsp;
 
         <li class="nav-item">
@@ -135,7 +147,31 @@
     </div>
   </nav>
 
+  {% for message in messages %}
+  
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+      
+      <h6 id='message-timer' class='alert alert-success text-center'> <i class="fa-solid fa-right-from-bracket"></i> &nbsp; {{message}}</h6>
+    
+    
+    {% endif %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+       
+      <h6 id='message-timer' class='alert alert-danger text-center'> <i class="fa-solid fa-ban"></i> &nbsp; {{message}}</h6>
+    
+    
+    {% endif %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+       
+      <h6 id='message-timer' class='alert alert-info text-center'><i class="fa-solid fa-pen"></i> &nbsp; {{message}}</h6>
+    
+    
+    {% endif %}
+  {% endfor %}
+
   <body>
     {% block content %} {% endblock %}
   </body>
+
+  <script src='{% static "js/app.js" %}'></script>
 </html>

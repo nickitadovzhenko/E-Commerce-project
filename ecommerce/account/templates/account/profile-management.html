@@ -20,10 +20,23 @@
 
 <body>
   <br>
+  <div class="container bg-white shadow-md p-5 form-layout text-center">
 
-   <div class="container bg-white shadow-md p-5 form-layout">
+            <h3> Profile Management </h3>
 
-            <h3> Update  your account </h3>
+            <hr>
+
+            <br>
+            
+  </div>
+  <br>
+  <br>
+
+
+
+  <div class="container bg-white shadow-md p-5 form-layout">
+
+            <h3 class='text-center'> Update  your account </h3>
 
             <hr>
 
@@ -44,19 +57,21 @@
                 <br> 
 
                 
-                <button type="submit" class="btn btn-primary navbar-btn text-white w-100 p-2"> <i class="fa fa-key" aria-hidden="true"></i> &nbsp; Update </button>
+                <button type="submit" class="btn btn-primary navbar-btn text-white w-100 p-2"> &nbsp; Update </button>
 
     </form>
   </div>
   <br>
-  <div class="container bg-white shadow-md p-5 form-layout">
+  <br>
+  <div class="container bg-white shadow-md p-5 form-layout text-center">
 
             <h3> Delete your account </h3>
 
             <hr>
 
             <br>
-            <a class="btn btn-danger navbar-btn text-white" type="button" href="{% url 'delete-account' %}">Delete Account</a>
+            <a class="btn btn-danger navbar-btn text-white w-100 p-2" type="button" href="{% url 'delete-account' %}">Delete Account</a>
+  </div>
 </body>
 
 {% endblock content %}
