@@ -35,7 +35,7 @@
       <h4> Track your orders </h4>
       <hr>
       <p>Here your can track all your orders</p>
-      <a class="btn btn-primary navbar-btn text-white" type="button" href="/">My orders</a>
+      <a class="btn btn-primary navbar-btn text-white" type="button" href="{% url 'track-orders' %}">My orders</a>
 
     </div>
     <br>
@@ -48,5 +48,13 @@
       <a class="btn btn-danger navbar-btn text-white" type="button" href="{% url 'delete-account' %}">Delete Account</a>
 
     </div>
-    
+    <br>
+    <div class="container bg-white shadow-md p-5 form-layout">
+      <h4> Manage shipping </h4>
+      <hr>
+      <br>
+      <a class="btn btn-primary navbar-btn text-white" type="button" href="{% url 'manage-shipping' %}">Manage shipping</a>
+      <br>
+
+    </div>
 {% endblock content %}

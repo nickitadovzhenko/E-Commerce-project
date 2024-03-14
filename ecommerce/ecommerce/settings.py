@@ -38,16 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'store',  # Django app 
+    'store',  # Django app
 
 
     'cart',
-    
+
     'mathfilters',
 
     'account',
 
     'crispy_forms',
+
+    'payment',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -144,7 +146,7 @@ MEDIA_ROOT = BASE_DIR / 'static/media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#Email configuration settings:
+# Email configuration settings:
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
@@ -154,3 +156,5 @@ EMAIL_USE_TLS = 'True'
 EMAIL_HOST_USER = 'evolveddrago@gmail.com'
 EMAIL_HOST_PASSWORD = 'apfe mhta tyyi xxgw'
 
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin-allow-popups'
